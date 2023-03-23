@@ -1,0 +1,60 @@
+{
+  "root": "apps/test-webb",
+  "sourceRoot": "apps/test-webb",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/next:build",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "root": "apps/test-webb",
+        "outputPath": "dist/apps/test-webb"
+      },
+      "configurations": {
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/next:server",
+      "options": {
+        "buildTarget": "test-webb:build",
+        "dev": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "test-webb:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nrwl/next:export",
+      "options": {
+        "buildTarget": "test-webb:build:production"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/apps/test-webb"
+      ],
+      "options": {
+        "jestConfig": "apps/test-webb/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "apps/test-webb/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    }
+  }
+}
